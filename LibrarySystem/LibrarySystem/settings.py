@@ -78,9 +78,11 @@ WSGI_APPLICATION = 'LibrarySystem.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
+import dj_database_url
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get("postgresql://library_database_uudi_user:3PvGsFnght2rWbuqBbJhQ17Xu3vfHry9@dpg-d25jbire5dus73a62gsg-a/library_database_uudi")
+        default="postgresql://library_database_uudi_user:3PvGsFnght2rWbuqBbJhQ17Xu3vfHry9@dpg-d25jbire5dus73a62gsg-a.oregon-postgres.render.com/library_database_uudi"
     )
 }
 
