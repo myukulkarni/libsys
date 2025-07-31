@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: librarysystem-django
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn LibrarySystem.wsgi
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: LibrarySystem.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "libsys.onrender.com"
