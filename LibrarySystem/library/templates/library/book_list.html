@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Books</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #f3f4f6, #e5e7eb);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4b5563;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        input[type="text"] {
+            padding: 0.5rem 1rem;
+            width: 250px;
+            border: 2px solid #9ca3af;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background-color: #4338ca;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .add-book-btn {
+            display: inline-block;
+            margin: 1rem auto;
+            background-color: #10b981;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .add-book-btn:hover {
+            background-color: #059669;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: white;
+            margin: 10px 0;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .book-info {
+            font-size: 1rem;
+            color: #374151;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .actions {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h2>📚 Library Books</h2>
+
+<form method="get">
+    <input type="text" name="q" placeholder="Search..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+
+<div style="text-align:center;">
+    <a href="{% url 'book_create' %}" class="add-book-btn">➕ Add Book</a>
+</div>
+
+<ul>
+  {% for book in books %}
+    <li>
+      <div class="book-info">
+        <strong>{{ book.title }}</strong> by {{ book.author }} | <em>{{ book.genre }}</em>
+      </div>
+      <div class="actions">
+        <a href="{% url 'book_update' book.pk %}">✏️ Edit</a>
+        <a href="{% url 'book_delete' book.pk %}">🗑️ Delete</a>
+      </div>
+    </li>
+  {% empty %}
+    <li style="text-align: center; font-style: italic;">No books found.</li>
+  {% endfor %}
+</ul>
+
+</body>
+</html>
