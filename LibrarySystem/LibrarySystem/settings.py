@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+import dj_database_url,os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,15 +77,11 @@ WSGI_APPLICATION = 'LibrarySystem.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'DRF',
-       'USER': 'postgres',
-       'PASSWORD': 'myu123',
-       'HOST': 'localhost',
-       'PORT': '5432',
-   }
+    'default': dj_database_url.config(
+        default=os.environ.get("postgresql://library_database_uudi_user:3PvGsFnght2rWbuqBbJhQ17Xu3vfHry9@dpg-d25jbire5dus73a62gsg-a/library_database_uudi")
+    )
 }
 
 
